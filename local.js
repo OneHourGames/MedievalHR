@@ -1,3 +1,9 @@
 const scenarioFrame = document.querySelector('#scenarioFrame');
 
-scenarioFrame.src = 'scenarios/lunoids';
+fetch('./scenarios/lunoids/index.html')
+.then(response => response.text())
+.then(html => {
+    console.log(html);
+    scenarioFrame.srcdoc = html;
+    return html;
+});

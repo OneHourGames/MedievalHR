@@ -84,10 +84,11 @@ body, html
     overflow: hidden;
 }
 
-#scenario iframe {
+#scenario #scenarioFrame {
     width: 100%;
     height: 100%;
     background-color: var(--fg-light);
+    border: none;
 }
 
 #inbox, #scenario {
