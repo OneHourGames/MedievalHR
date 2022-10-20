@@ -15,15 +15,18 @@
                 <h2>Inbox</h2>
                 <article>
                     <button class="scenario" id="r8_scenario">
-                        <p class="scenario__title">__name__</p>
-                        <p class="scenario__description">__description__</p>
+                        <span class="scenario__isUnread"></span>
+                        <div class="scenario__content">
+                            <p class="scenario__content__title">__name__</p>
+                            <p class="scenario__content__description">__description__</p>
+                        </div>
                     </button>
                 </article>
             </section>
             <section id="scenario">
                 <h2>Scenario</h2>
                 <article>
-                    <iframe src="./scenarios/blankScenario.html" id="scenarioFrame" width="800" height="600"></iframe>
+                    <iframe id="scenarioFrame" width="800" height="600" sandbox="allow-forms allow-scripts allow-modals"></iframe>
                 </article>
             </section>
         </main>
