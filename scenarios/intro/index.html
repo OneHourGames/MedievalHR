@@ -11,31 +11,44 @@
         </style>
     </head>
     <body>
-        <center>
         <h1>Welcome to RESCorp&trade;</h1>
-        We're happy to have you as a nearly worthless cog in our magnificent coporate machine.
+        <p>We're happy to have you as a nearly worthless cog in our magnificent coporate machine.</p>
+        
         <hr>
-        <br>
-        <br>
-        <br>
-        Your first task is to sign the employment contract.
-        <br>
         <br>
 
         <form name=loretta>
-            <input data=1 type=submit value="Sign Contract" />
-            <br>
-            <br>
-            <input type=submit value="There's Been a Mistake" />
-            <br>
-            <br>
-            <input type=submit value="Call In Sick" />
-            <br>
-            <br>
-            <input type=submit value="Fuck This Job; I Quit!" />
+            <fieldset>
+                <legend>Your first task is to sign the employment contract.</legend>
+                <input data=1 type=submit value="Sign Contract" />
+                <input type=submit value="There's Been a Mistake" />
+                <input type=submit value="Call In Sick" />
+                <input type=submit value="Fuck This Job; I Quit!" />
+            </fieldset>
         </form>
+        
+        <script>
+            __inject__
+            
+            // do some custom stuff to show a "completed" state
+            // maybe also store the choice? You would have to change 'completeCurrentScenario' in the main local.js to do this
+            if(currentScenario?.completed)
+            {
+                console.log("Scenario completed");
+                document.forms.loretta.style.display = "none";
+            }
+            
+            document.forms.loretta.onsubmit = evt => {
+                evt.preventDefault();
+                const { submitter } = evt;
 
-        </center>
-        <script src=local.js></script>
+                if( submitter.getAttribute( "data" ) === "" + 1 ) {
+                    console.log( "You signed the contract!" );
+                    completeCurrentScenario();
+                } else {
+                    console.log( "You failed scenario!" );
+                }
+            };
+        </script>
     </body>
 </html>

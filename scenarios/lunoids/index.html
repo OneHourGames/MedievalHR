@@ -3,29 +3,45 @@
     <head>
     </head>
     <body>
-        <center>
         <h1>Lunoids&trade;</h1>
-        Another quality scenario brought to you by RESCorp&trade; in collaboration with PIERamid&trade; Profiteering&trade;
+        <p>Another quality scenario brought to you by RESCorp&trade; in collaboration with PIERamid&trade; Profiteering&trade;</p>
+        
         <hr>
-
-        <br>
-        <br>
-        <br>
-        Lunoids are dying en masse on the Blessemated Investinary Space Port #12.
-        What will you do?
         <br>
         <br>
 
         <form name=loretta>
-            <input type=submit value="Ignore them" />
-            <br>
-            <br>
-            <input type=submit value="Panic" />
-            <br>
-            <br>
-            <input type=submit value="Send In Troops" />
+            <fieldset>
+                <legend>Lunoids are dying en masse on the Blessemated Investinary Space Port #12. What will you do?</legend>
+                <input type=submit value="Ignore them" />
+                <input type=submit value="Panic" />
+                <input data="1" type=submit value="Send In Troops" />
+            </fieldset>
         </form>
 
-        </center>
+        <script>
+            __inject__
+
+            // do some custom stuff to show a "completed" state
+            // maybe also store the choice? You would have to change 'completeCurrentScenario' in the main local.js to do this
+            if(currentScenario?.completed)
+            {
+                console.log("Scenario completed");
+                document.forms.loretta.style.display = "none";
+            }
+
+            document.forms.loretta.onsubmit = evt => {
+                evt.preventDefault();
+                const { submitter } = evt;
+
+                if( submitter.getAttribute( "data" ) === "" + 1 ) {
+                    completeCurrentScenario();
+                }
+                else
+                {
+                    console.log( "You failed scenario!" );
+                }
+            };
+        </script>
     </body>
 </html>
