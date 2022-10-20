@@ -19,12 +19,12 @@ const missingScenarioUrl = "./scenarios/blankScenario.html";
  */
 const scenarios = [
     {
-        name: 'intro',
-        description: 'Welcome to the Resolutions Corporation. This is your first scenario. Click here to start.',
+        name: 'Welcom to RESCorp Resolutions',
+        description: 'Welcome to the RESCorp Resolutions! You will need to sign a few documents before you can start working.',
         url: './scenarios/intro/index.html',
         sender: defaultScenarioSender,
         shown: true,
-        completed: false
+        completed: true
     },
     {
         name: 'lunoids',
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadScenario(missingScenarioUrl);
     
     // get a list of scenarios that are shown
-    const shownScenarios = scenarios.filter(scenario => scenario.shown);
+    const shownScenarios = scenarios.filter(scenario => scenario.shown).reverse();
 
     // rplc8 list of shownScenarios into #inbox
     const inbox = sleepless.rplc8("#r8_scenario");
