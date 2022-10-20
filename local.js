@@ -1,6 +1,6 @@
 const scenarioFrame = document.querySelector('#scenarioFrame');
 
-const defaultScenarioSender = "no-reply@resolutions.rescorp";
+const defaultScenarioSender = "RESCorp Resolutions";
 const missingScenarioUrl = "./scenarios/blankScenario.html";
 
 // rplc8 list of shownScenarios into #inbox
@@ -22,8 +22,8 @@ const inbox = sleepless.rplc8("#r8_scenario");
  */
 const scenarios = [
     {
-        name: 'Welcom to RESCorp Resolutions',
-        description: 'Welcome to the RESCorp Resolutions! You will need to sign a few documents before you can start working.',
+        name: 'Welcome to RESCorp Resolutions',
+        description: 'You will need to sign a few documents before you can start working.',
         url: './scenarios/intro/index.html',
         sender: defaultScenarioSender,
         shown: true,
@@ -39,17 +39,33 @@ const scenarios = [
         completed: false,
         read: false,
     },
+    {
+        name: 'The Great Escape',
+        description: 'You are a prisoner on a space station. You need to escape!',
+        url: './scenarios/theGreatEscape/index.html',
+        sender: "Bob Abadacass",
+        shown: false,
+        read: false,
+        completed: false,
+    }
 ];
 
 const getGameSave = function()
 {
     const gameSave = localStorage.getItem('gameSave');
+    
+    let parsedGameSave = scenarios;
     if (gameSave && gameSave !== 'undefined')
     {
-        return JSON.parse(gameSave);
+        // add any new scenarios to the end of the existing game save
+        parsedGameSave = JSON.parse(gameSave);
+        if(parsedGameSave.length < scenarios.length)
+        {
+            parsedGameSave.push(...scenarios.slice(parsedGameSave.length));
+        }
     }
     
-    saveGame(scenarios);
+    saveGame(parsedGameSave);
     return JSON.parse(localStorage.getItem('gameSave'));
 }
 
