@@ -148,3 +148,12 @@ body, html
     font-weight: 700;
     color: var(--fg-light);
 }
+
+#inbox .scenario .scenario__description {
+    /* limit to 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
