@@ -21,7 +21,7 @@ const scenarios = [
     {
         name: 'intro',
         description: 'Welcome to the Resolutions Corporation. This is your first scenario. Click here to start.',
-        url: './scenarios/blankScenario.html',
+        url: './scenarios/intro/index.html',
         sender: defaultScenarioSender,
         shown: true,
         completed: false
