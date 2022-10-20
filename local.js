@@ -100,7 +100,7 @@ const loadScenario = function(url)
                 {
                     window.parent.postMessage({
                         action: "completeScenario",
-                        scenario: ${JSON.stringify(nextScenario)},
+                        scenario: currentScenario, 
                     }, "*");
                 }
             `;
