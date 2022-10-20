@@ -112,3 +112,39 @@ body, html
     padding: 8px 16px;
     border-radius: 8px 8px 0 0;
 }
+
+
+#inbox .scenario {
+    padding: 8px;
+    background: var(--bg-light);
+    color: var(--fg-light);
+    font-size: 12pt;
+    font-weight: 400;
+    border: none;
+    border-bottom: 2px solid var(--bg);
+    text-align: left;
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+}
+
+#inbox .scenario:hover {
+    background-color: var(--bg);
+    cursor: pointer;
+}
+
+#inbox .scenario.active {
+    background-color: var(--bg);
+    opacity: 1;
+}
+
+#inbox .scenario.completed {
+    opacity: 0.5;
+}
+
+#inbox .scenario .scenario__title {
+    font-size: 16pt;
+    font-weight: 700;
+    color: var(--fg-light);
+}
