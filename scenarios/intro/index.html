@@ -7,6 +7,10 @@
                 background: black;
                 color: white;
             }
+
+            .hid {
+                display: none;
+            }
             
         </style>
     </head>
@@ -17,38 +21,111 @@
         <hr>
         <br>
 
-        <form name=loretta>
+        <form name=play class="hid">
             <fieldset>
                 <legend>Your first task is to sign the employment contract.</legend>
-                <input data=1 type=submit value="Sign Contract" />
-                <input type=submit value="There's Been a Mistake" />
-                <input type=submit value="Call In Sick" />
-                <input type=submit value="Fuck This Job; I Quit!" />
+                <input data=sign type=submit value="Sign Contract" />
+                <input data=mistake type=submit value="There's Been a Mistake" />
+                <input data=sick type=submit value="Call In Sick" />
+                <input data=quit type=submit value="Fuck This Job; I Quit!" />
             </fieldset>
+        </form>
+
+        <form name=sign class="hid">
+            You've completed this scenario.  Good work.  I guess.
+        </form>
+        
+        <form name=mistake class="hid">
+            <p>
+                I can assure you, there's been no mistake.
+                We've got the paperwork right in front of us.
+                You'd better sign on the dotted line if you know what's good for you.
+            </p>
+            <input type=submit value="Try again." />
+        </form>
+        
+        <form name=sick class="hid">
+            <p>
+                Call in Sick?!
+                Seriously?
+                Geez, man, that's no way to climb the corporate ladder!
+            </p>
+            <input type=submit value="Try again." />
+        </form>
+        
+        <form name=quit class="hid">
+            <p>
+                Just quit, eh?
+                Understandable choice, sure.
+                But you're not getting a good reference.
+            </p>
+            <input type=submit value="Try again." />
         </form>
         
         <script>
+
+            // ---------------------------------------
+            // XXX This stuff is in sleepless.js
+
+            const log = console.log;
+
+            // Convert HTMLCollection to normal array
+            HTMLCollection.prototype.toArray = function() {
+                let arr = [];
+                for(let i = 0; i < this.length; i++) {
+                    arr.push( this[ i ]);
+                }
+                return arr;
+            };
+
+
+            // ---------------------------------------
+
             __inject__
+
+
+            // ---------------------------------------
+
+            const forms = document.forms;
+
+            const showForm = function( shown ) {
+                forms.toArray().forEach( form => {
+                    form.classList.add( 'hid' );
+                } );
+                if( shown ) {
+                    const form = forms[ shown ];
+                    form.classList.remove( 'hid' );
+                }
+            };
             
             // do some custom stuff to show a "completed" state
             // maybe also store the choice? You would have to change 'completeCurrentScenario' in the main local.js to do this
-            if(currentScenario?.completed)
+            if(currentScenario.completed)
             {
-                console.log("Scenario completed");
-                document.forms.loretta.style.display = "none";
+                showForm( 'sign' );
+            } else {
+                showForm( 'play' );
             }
-            
-            document.forms.loretta.onsubmit = evt => {
-                evt.preventDefault();
-                const { submitter } = evt;
 
-                if( submitter.getAttribute( "data" ) === "" + 1 ) {
-                    console.log( "You signed the contract!" );
-                    completeCurrentScenario();
+            const submitted = evt => {
+                evt.preventDefault();
+
+                const shown = evt.submitter.getAttribute( "data" );
+
+                if( shown ) {
+                    showForm( shown );
+                    if( shown == "sign" ) {
+                        completeCurrentScenario();
+                    }
                 } else {
-                    console.log( "You failed scenario!" );
+                    showForm( "play" );
                 }
             };
+
+            forms.toArray().forEach( form => {
+                form.onsubmit = submitted;
+            } );
+
         </script>
     </body>
 </html>
